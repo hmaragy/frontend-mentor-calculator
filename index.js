@@ -158,47 +158,13 @@ function handleValue(value) {
   Calculator.handleInput(value);
 }
 
-let currentPos = 1;
-
-setInterval(function themeInterval() {
-  let body = document.querySelector("body");
-  let bodyTheme = document.querySelector("body").classList[0];
-  if (bodyTheme !== `theme-${currentPos}`) {
-    body.classList.remove(bodyTheme);
-    body.classList.add(`theme-${currentPos}`);
-  }
-}, 100);
-
-document.querySelector(".area-2").addEventListener("click", function () {
-  if (currentPos == 1) {
-    document.querySelector(".app__toggle--toggle").style.order = "2";
-    document.querySelector(".area-2").style.order = "1";
-    currentPos = 2;
-  } else if (currentPos == 2) {
-    document.querySelector(".app__toggle--toggle").style.order = "1";
-    document.querySelector(".area-2").style.order = "2";
-    currentPos = 1;
-  } else {
-    document.querySelector(".app__toggle--toggle").style.order = "1";
-    document.querySelector(".area-2").style.order = "2";
-    document.querySelector(".area-3").style.order = "3";
-    currentPos = 1;
-  }
-});
-
-document.querySelector(".area-3").addEventListener("click", function () {
-  if (currentPos == 2) {
-    document.querySelector(".app__toggle--toggle").style.order = "3";
-    document.querySelector(".area-3").style.order = "2";
-    currentPos = 3;
-  } else if (currentPos == 3) {
-    document.querySelector(".app__toggle--toggle").style.order = "2";
-    document.querySelector(".area-3").style.order = "3";
-    currentPos = 2;
-  } else {
-    document.querySelector(".app__toggle--toggle").style.order = "3";
-    document.querySelector(".area-2").style.order = "1";
-    document.querySelector(".area-3").style.order = "2";
-    currentPos = 3;
-  }
-});
+document
+  .querySelector(".app__toggle--toggle-area")
+  .addEventListener("click", (e) => {
+    let body = document.querySelector("body");
+    let bodyTheme = document.querySelector("body").classList[0];
+    if (bodyTheme !== `theme-${e.target.value}`) {
+      body.classList.remove(bodyTheme);
+      body.classList.add(`theme-${e.target.value}`);
+    }
+  });

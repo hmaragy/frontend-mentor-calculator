@@ -91,7 +91,6 @@ body {
   gap: 1rem;
   font-size: 0.7rem;
   align-items: flex-end;
-  cursor: pointer;
 }
 
 .app__toggle-button {
@@ -102,32 +101,23 @@ body {
   justify-items: center;
 }
 .app__toggle--toggle-area {
+  cursor: pointer;
   width: 4rem;
   grid-column: 1/4;
   height: 1.2rem;
   border-radius: 2rem;
   background-color: var(--keypad-bg);
-  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-  align-items: center;
+  appearance: inherit;
+  padding: 0 0.2rem;
 }
-.app__toggle--toggle {
-  width: 0.8rem;
-  height: 0.8rem;
+
+.app__toggle--toggle-area::-webkit-slider-thumb {
+  -webkit-appearance: none;
   background-color: var(--equals-bg);
+  height: 0.8rem;
   border-radius: 50%;
-  order: 1;
-}
-.area-2 {
-  width: 100%;
-  height: 100%;
-  order: 2;
-}
-.area-3 {
-  height: 100%;
-  width: 100%;
-  order: 3;
+  width: 0.8rem;
 }
 
 .app__screen {
