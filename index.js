@@ -1,25 +1,19 @@
-let currentOperation = null;
-
-document.querySelectorAll(".app__keypad-btn").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    handleValue(e.target.dataset.value);
-  });
-});
+"use strict";
 
 class Screen {
-  static screen = document.querySelector(".app__result");
+  static element = document.querySelector(".app__result");
 
   static display(content) {
-    Screen.screen.innerText = content.join("");
+    Screen.element.innerText = content.join("");
   }
 
   static clear() {
-    Screen.screen.innerText = "";
+    Screen.element.innerText = "";
   }
 }
 
 class Calculator {
-  static OPERATIONS = ["+", "-", "x", "/"];
+  static OPERATIONS = ["+", "-", "*", "/"];
   static DEL = "del";
   static EQ = "=";
   static RESET = "rst";
@@ -27,32 +21,21 @@ class Calculator {
   static result = null;
   static values = [];
 
-  static add(a, b) {
-    return a + b;
-  }
-
-  static sub(a, b) {
-    return a - b;
-  }
-
-  static div(a, b) {
-    return a / b;
-  }
-
-  static mul(a, b) {
-    return a * b;
-  }
-
   static appendValue(value) {
     if (
-      //If the entered value is a number or decimal
       (!Number.isNaN(
         Number.parseInt(Calculator.values.slice(-1)[0]?.slice(-1))
       ) ||
         Calculator.values.slice(-1)[0]?.slice(-1) === ".") &&
       (!Number.isNaN(Number.parseFloat(value)) || value == ".")
     ) {
+      //append number.
       Calculator.values[Calculator.values.length - 1] += value;
+      if (value !== ".") {
+        Calculator.values[Calculator.values.length - 1] = parseFloat(
+          Calculator.values[Calculator.values.length - 1]
+        ).toString();
+      }
     } else if (
       //if entered value is an operation and there's an operation entered before it.
       Calculator.OPERATIONS.includes(Calculator.values.slice(-1)[0]) &&
@@ -61,7 +44,7 @@ class Calculator {
       Calculator.values[Calculator.values.length - 1] = value;
     } else if (Calculator.OPERATIONS.includes(value)) {
       if (Calculator.values.length === 0 && Calculator.result) {
-        Calculator.values.push(Calculator.result);
+        Calculator.values.push(Calculator.result.toString());
         Calculator.result = null;
       }
       Calculator.values.push(value);
@@ -73,6 +56,8 @@ class Calculator {
 
   static backspace() {
     if (!Calculator.values.length) {
+      Calculator.result = null;
+      Screen.display(Calculator.values);
       return;
     }
     let lastValue = Calculator.values.length - 1;
@@ -90,49 +75,13 @@ class Calculator {
   }
 
   static calculate() {
+    if (Calculator.values.length === 0) {
+      return;
+    }
     if (!Calculator.OPERATIONS.includes(Calculator.values[0])) {
       Calculator.result = 0;
     }
-    console.log(Calculator.result, Calculator.values);
-    for (let i = 0; i < Calculator.values.length; i++) {
-      let value = Calculator.values[i];
-      if (!Number.isNaN(Number.parseFloat(value))) {
-        Calculator.result = Number.parseFloat(value);
-      } else {
-        switch (value) {
-          case "+":
-            console.log(
-              "Addition",
-              Calculator.result,
-              +Calculator.values[i + 1]
-            );
-            Calculator.result = Calculator.add(
-              Calculator.result,
-              +Calculator.values[++i]
-            );
-            break;
-          case "-":
-            Calculator.result = Calculator.sub(
-              Calculator.result,
-              +Calculator.values[++i]
-            );
-            break;
-          case "x":
-            Calculator.result = Calculator.mul(
-              Calculator.result,
-              +Calculator.values[++i]
-            );
-            break;
-
-          case "/":
-            Calculator.result = Calculator.div(
-              Calculator.result,
-              +Calculator.values[++i]
-            );
-            break;
-        }
-      }
-    }
+    Calculator.result = eval(Calculator.values.join(""));
     Calculator.values = [];
     Screen.display([Calculator.result]);
   }
@@ -154,10 +103,7 @@ class Calculator {
   }
 }
 
-function handleValue(value) {
-  Calculator.handleInput(value);
-}
-
+/* Event Listeners */
 document
   .querySelector(".app__toggle--toggle-area")
   .addEventListener("click", (e) => {
@@ -168,3 +114,9 @@ document
       body.classList.add(`theme-${e.target.value}`);
     }
   });
+
+document.querySelectorAll(".app__keypad-btn").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    Calculator.handleInput(e.target.dataset.value);
+  });
+});
