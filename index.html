@@ -5,8 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
 </head>
-<body>
-    
+<body class="theme-1">
+    <div class="app">
+        <div class="app__header">
+            <h1 class="app__logo">calc</h1>
+            <div class="app__toggle">
+                <p class="app__toggle--text">Theme</p>
+                <div class="app__toggle-button">
+                    <p class="app__theme--1">1</p>
+                    <p class="app__theme--2">2</p>
+                    <p class="app__theme--3">3</p>
+                    <div class="app__toggle--toggle-area">
+                        <div class="app__toggle--toggle"></div>
+                        <div class="area-2"></div>
+                        <div class="area-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app__screen">
+            <p class="app__result"></p>
+        </div>
+        <div class="app__keypad">
+            <button data-value="7" class="app__keypad-btn">7</button>
+            <button data-value="8" class="app__keypad-btn">8</button>
+            <button data-value="9" class="app__keypad-btn">9</button>
+            <button data-value="del" class="app__keypad-btn del">DEL</button>
+            <button data-value="4" class="app__keypad-btn">4</button>
+            <button data-value="5" class="app__keypad-btn">5</button>
+            <button data-value="6" class="app__keypad-btn">6</button>
+            <button data-value="+" class="app__keypad-btn">+</button>
+            <button data-value="1" class="app__keypad-btn">1</button>
+            <button data-value="2" class="app__keypad-btn">2</button>
+            <button data-value="3" class="app__keypad-btn">3</button>
+            <button data-value="-" class="app__keypad-btn">-</button>
+            <button data-value="." class="app__keypad-btn">.</button>
+            <button data-value="0" class="app__keypad-btn">0</button>
+            <button data-value="/" class="app__keypad-btn">/</button>
+            <button data-value="x" class="app__keypad-btn">x</button>
+            <button data-value="rst" class="app__keypad-btn rst">RESET</button>
+            <button data-value="=" class="app__keypad-btn eq">=</button>
+        </div>
+    </div>
 </body>
 </html>
