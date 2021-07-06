@@ -108,6 +108,17 @@ class Calculator {
 }
 
 /* Event Listeners */
+if (
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+  let body = document.querySelector("body");
+  let bodyTheme = document.querySelector("body").classList[0];
+  body.classList.remove(bodyTheme);
+  body.classList.add("theme-3");
+  document.querySelector(".app__toggle--toggle-area").value = "3";
+}
+
 document
   .querySelector(".app__toggle--toggle-area")
   .addEventListener("click", (e) => {
