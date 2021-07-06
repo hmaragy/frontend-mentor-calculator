@@ -83,7 +83,11 @@ class Calculator {
     }
     Calculator.result = eval(Calculator.values.join(""));
     Calculator.values = [];
-    Screen.display([Calculator.result]);
+    Screen.display([
+      parseFloat(Calculator.result)
+        .toFixed(3)
+        .replace(/[.,]000$/, ""),
+    ]);
   }
 
   static handleInput(value) {
